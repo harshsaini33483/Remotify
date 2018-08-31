@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Remotify</string>
+    <string name="ip">IP Address</string>
+    <string name="port">Port </string>
+    <string name="connect">Connect</string>
+    <string name="connecting">Connecting</string>
+</resources>
