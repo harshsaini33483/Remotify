@@ -4,6 +4,7 @@
     <string name="port">Port </string>
     <string name="connect">Connect</string>
     <string name="connecting">Connecting...</string>
+    <string name="reconnect">Reconnect..</string>
     <string name="probleminsocket">Problem Occured please check IP or port no</string>
     <string name="emptyField">One or More Field is Empty</string>
     <string name="noNetwork">Please Check Your Connection Before Connecting</string>

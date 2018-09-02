@@ -22,7 +22,6 @@ import android.widget.ProgressBar;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -36,8 +35,6 @@ public class AndroidConnect extends AppCompatActivity {
     final static int MESSAGE_CONNECT = 1;
     final static int MESSAGE_NOTCONNECT = 2;
     final static int MESSAGE_TIMEOUT = 3;
-
-    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,14 +73,14 @@ public class AndroidConnect extends AppCompatActivity {
                     }.start();
                     break;
                 case MESSAGE_NOTCONNECT:
-                    connectButton.setText("Reconnect");
+                    connectButton.setText(R.string.reconnect);
                     connectButton.setEnabled(true);
                     ipaddress.setEnabled(true);
                     portNo.setEnabled(true);
                     progressBar.setVisibility(View.INVISIBLE);
                     dialogBox(R.string.probleminsocket);
                 case MESSAGE_TIMEOUT:
-                    connectButton.setText("Reconnect");
+                    connectButton.setText(R.string.reconnect);
                     connectButton.setEnabled(true);
                     ipaddress.setEnabled(true);
                     portNo.setEnabled(true);
@@ -118,12 +115,7 @@ public class AndroidConnect extends AppCompatActivity {
         Socket socket;
         String ipaddress;
         int port;
-
-        public ClientThread() {
-            super();
-        }
-
-        public ClientThread(String ipaddress, int port) {
+        private ClientThread(String ipaddress, int port) {
             this.ipaddress = ipaddress;
             this.port = port;
         }
@@ -156,26 +148,14 @@ public class AndroidConnect extends AppCompatActivity {
         }
     }
     class Receive extends Thread {
-        InputStream inputStream;
         ObjectInputStream objectInputStream;
-
-        public Receive() {
-            super();
-
-        }
-
         @Override
         public void run() {
             super.run();
             try {
                 objectInputStream = new ObjectInputStream(socket.getInputStream());
-                while (true) {
-
                     String str = (String) objectInputStream.readObject();
                     Log.w("SEND Thread", str);
-
-
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
