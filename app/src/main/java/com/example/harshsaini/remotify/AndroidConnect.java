@@ -2,6 +2,7 @@ package com.example.harshsaini.remotify;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,17 +11,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-
+import android.widget.Toast;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -36,22 +35,6 @@ public class AndroidConnect extends AppCompatActivity {
     final static int MESSAGE_NOTCONNECT = 2;
     final static int MESSAGE_TIMEOUT = 3;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main1);
-        ipaddress = (TextInputEditText) findViewById(R.id.ipaddress);
-        portNo = (TextInputEditText) findViewById(R.id.portNo);
-        connectButton = (Button) findViewById(R.id.connectButton);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        connectButton.setOnClickListener(new connectingButton());
-        if(!isNetworkAvailable())
-        {
-            dialogBox(R.string.noNetwork);
-        }
-    }
-
-
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -65,6 +48,9 @@ public class AndroidConnect extends AppCompatActivity {
                         public void onFinish() {
                             progressBar.setVisibility(View.INVISIBLE);
                             new Receive().start();
+                            Intent intent = new Intent(AndroidConnect.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                         public void onTick(long millisUntilFinished) {
@@ -91,6 +77,20 @@ public class AndroidConnect extends AppCompatActivity {
         }
     });
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main1);
+        ipaddress = findViewById(R.id.ipaddress);
+        portNo = findViewById(R.id.portNo);
+        connectButton = findViewById(R.id.connectButton);
+        progressBar = findViewById(R.id.progressBar);
+        connectButton.setOnClickListener(new connectingButton());
+        if (!isNetworkAvailable()) {
+            dialogBox(R.string.noNetwork);
+        }
+    }
+
 
     public void dialogBox(int msg){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -105,6 +105,8 @@ public class AndroidConnect extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -147,6 +149,7 @@ public class AndroidConnect extends AppCompatActivity {
 
         }
     }
+
     class Receive extends Thread {
         ObjectInputStream objectInputStream;
         @Override
@@ -156,6 +159,7 @@ public class AndroidConnect extends AppCompatActivity {
                 objectInputStream = new ObjectInputStream(socket.getInputStream());
                     String str = (String) objectInputStream.readObject();
                     Log.w("SEND Thread", str);
+                Toast.makeText(AndroidConnect.this, str, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
