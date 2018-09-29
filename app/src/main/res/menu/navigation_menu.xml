@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/liveScreenNav"
+            android:icon="@drawable/ic_livescreen"
+            android:title="@string/liveScreen" />
+
+        <item
+            android:id="@+id/controlMouseNav"
+            android:icon="@drawable/ic_mouse"
+            android:title="@string/controlMouse" />
+
+        <item
+            android:id="@+id/keyBoardNav"
+            android:icon="@drawable/ic_keyboard"
+            android:title="@string/controlKeyboard" />
+
+        <item
+            android:id="@+id/liveScreenMouseNav"
+            android:icon="@drawable/ic_personal_video_black_24dp"
+            android:title="@string/liveScreenandmouse" />
+
+        <item
+            android:id="@+id/cmdNav"
+            android:icon="@drawable/ic_cmd"
+            android:title="@string/cmd" />
+
+        <item
+            android:id="@+id/powerControlNav"
+            android:icon="@drawable/ic_settingspower"
+            android:title="@string/powerControl" />
+
+        <item
+            android:id="@+id/musicNav"
+            android:icon="@drawable/ic_music"
+            android:title="@string/music" />
+
+        <item
+            android:id="@+id/cortanaNav"
+            android:icon="@drawable/ic_mic"
+            android:title="@string/cortana" />
+    </group>
+
+    <item android:title="Extras">
+        <menu>
+            <item
+                android:id="@+id/aboutNav"
+                android:icon="@drawable/ic_about"
+                android:title="@string/about" />
+        </menu>
+    </item>
+
+
+</menu>
