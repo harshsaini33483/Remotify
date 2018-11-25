@@ -19,8 +19,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -41,13 +41,13 @@ public class AndroidConnect extends AppCompatActivity {
             Log.w("Handler", "HANDLER CLASS" + msg.what + " " + msg.obj);
             switch (msg.what) {
                 case MESSAGE_CONNECT:
-                    connectButton.setText("Connected");
+                    connectButton.setText(R.string.connected);
                     connectButton.setEnabled(false);
                     socket = (Socket) msg.obj;
                     new CountDownTimer(1000, 500) {
                         public void onFinish() {
                             progressBar.setVisibility(View.INVISIBLE);
-                            new Receive().start();
+                            //new Receive().start();
                             Intent intent = new Intent(AndroidConnect.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -58,6 +58,7 @@ public class AndroidConnect extends AppCompatActivity {
                         }
                     }.start();
                     break;
+
                 case MESSAGE_NOTCONNECT:
                     connectButton.setText(R.string.reconnect);
                     connectButton.setEnabled(true);
@@ -65,6 +66,8 @@ public class AndroidConnect extends AppCompatActivity {
                     portNo.setEnabled(true);
                     progressBar.setVisibility(View.INVISIBLE);
                     dialogBox(R.string.probleminsocket);
+                    break;
+
                 case MESSAGE_TIMEOUT:
                     connectButton.setText(R.string.reconnect);
                     connectButton.setEnabled(true);
@@ -85,10 +88,14 @@ public class AndroidConnect extends AppCompatActivity {
         portNo = findViewById(R.id.portNo);
         connectButton = findViewById(R.id.connectButton);
         progressBar = findViewById(R.id.progressBar);
+
+
         connectButton.setOnClickListener(new connectingButton());
         if (!isNetworkAvailable()) {
             dialogBox(R.string.noNetwork);
         }
+
+
     }
 
 
@@ -113,6 +120,8 @@ public class AndroidConnect extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+
     class ClientThread extends Thread {
         Socket socket;
         String ipaddress;
@@ -150,14 +159,15 @@ public class AndroidConnect extends AppCompatActivity {
         }
     }
 
+
     class Receive extends Thread {
-        ObjectInputStream objectInputStream;
+        DataInputStream objectInputStream;
         @Override
         public void run() {
             super.run();
             try {
-                objectInputStream = new ObjectInputStream(socket.getInputStream());
-                    String str = (String) objectInputStream.readObject();
+                objectInputStream = new DataInputStream(socket.getInputStream());
+                String str = objectInputStream.readUTF();
                     Log.w("SEND Thread", str);
                 Toast.makeText(AndroidConnect.this, str, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
@@ -167,6 +177,8 @@ public class AndroidConnect extends AppCompatActivity {
 
         }
     }
+
+
     class connectingButton implements View.OnClickListener{
 
         @Override
@@ -203,5 +215,6 @@ public class AndroidConnect extends AppCompatActivity {
                 }
         }
     }
+
 
 }

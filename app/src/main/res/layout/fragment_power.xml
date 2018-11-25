@@ -3,12 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradientbackground2"
+    android:orientation="vertical"
     tools:context=".fragments.power">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="230dp"
+        android:src="@drawable/shutdown"
+        android:tooltipText="@string/shutdown" />
+
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/sleep"
+        android:tooltipText="@string/sleep" />
+
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="350dp"
+        android:src="@drawable/restart"
+        android:tooltipText="@string/restart" />
 
 </FrameLayout>

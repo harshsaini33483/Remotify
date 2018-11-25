@@ -10,12 +10,13 @@
     <string name="noNetwork">Please Check Your Connection Before Connecting</string>
     <string name="noConnection">Please Connect to a Network Before Connecting</string>
     <string name="timeOut">Socket Timeout check your Connection</string>
-
+    <string name="streamDisconnected">Stream is Disconnected Kindly Reconnect Again</string>
 
     <string name="navigationbar_open">Navigation Bar Open</string>
 
     <string name="navigationbar_close">Navigation Bar Close</string>
 
+    <string name="disconnect">Disconnect</string>
 
     <string name="about">About Project</string>
 
@@ -28,6 +29,12 @@
     <string name="music">Music</string>
     <string name="liveScreenandmouse">Live Screen + Mouse</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="shutdown">Shutdown</string>
+
+    <string name="restart">Restart</string>
+
+    <string name="sleep">Sleep</string>
+    <string name="connected">Connected</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
