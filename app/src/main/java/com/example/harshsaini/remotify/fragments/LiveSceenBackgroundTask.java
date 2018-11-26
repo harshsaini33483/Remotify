@@ -18,13 +18,6 @@ public class LiveSceenBackgroundTask extends AsyncTask<Void, Void, Void> {
 
     public volatile static boolean running = true;
     ImageView imageView;
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            imageView.setImageBitmap((Bitmap) msg.obj);
-            return false;
-        }
-    });
     private InputStream input;
     private int screenWidth, screenHeight;
 
@@ -42,7 +35,6 @@ public class LiveSceenBackgroundTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        Log.e("Background Task", "TASK IMAGES SCAN   " + running);
 
         while (running) {
             try {
@@ -50,9 +42,8 @@ public class LiveSceenBackgroundTask extends AsyncTask<Void, Void, Void> {
                 int count = 0;
                 do {
                     count += input.read(bytes, count, bytes.length - count);
-                    Log.w("COunt", "Count" + count);
 
-                   //NO IDEA WHY IT DOES GOES TO THIS VALUE AND LIVE SCREEN DOES NOT WORK THEN
+                    //NO IDEA WHY IT DOES GOES TO THIS VALUE AND LIVE SCREEN DOES NOT WORK THE
                     if (count == 1048576) {
                         count = 0;
                         break;
@@ -60,13 +51,16 @@ public class LiveSceenBackgroundTask extends AsyncTask<Void, Void, Void> {
                 }
                 while (!(count > 4 && bytes[count - 2] == (byte) -1 && bytes[count - 1] == (byte) -39));
 
-                Log.d("COUNT", Integer.toString(count));
                 Matrix matrix = new Matrix();
-                matrix.postRotate(-90);
+                matrix.postRotate(90);
 
                 Bitmap bit = BitmapFactory.decodeByteArray(bytes, 0, count);
-                Bitmap rotated = Bitmap.createBitmap(bit, 0, 0, bit.getWidth(), bit.getHeight(), matrix, true);
-                handler.obtainMessage(1, rotated).sendToTarget();
+                if(bit!=null)
+                {
+                    Bitmap rotated = Bitmap.createBitmap(bit, 0, 0, bit.getWidth(), bit.getHeight(), matrix, true);
+                    handler.obtainMessage(1, rotated).sendToTarget();
+
+                }
 
             } catch (Exception e) {
                 Log.w("LOG FIRE ON", "PATA NHI KYA PROBLEM HAI");
@@ -80,4 +74,12 @@ public class LiveSceenBackgroundTask extends AsyncTask<Void, Void, Void> {
 
     }
 
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+
+            imageView.setImageBitmap((Bitmap) msg.obj);
+            return false;
+        }
+    });
 }

@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.harshsaini.remotify.fragments.Keyboard;
@@ -44,45 +45,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static int width;
     DisplayMetrics displayMetrics;
 
-    public static InputStream getInputStream() {
-        return inputStream;
-    }
 
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-
-        }
-    }
-
-    public static OutputStream getOutputStream() {
-        return outputStream;
-    }
-
-    public static int getHeight() {
-        return height;
-    }
-
-    public static int getWidth() {
-        return width;
-    }
-
-    public static DataOutputStream getDataOutputStream() {
-        return dataOutputStream;
-    }
-
-    public static DataInputStream getDataInputStream() {
-        return dataInputStream;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setTheme(android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         socketConnect();
 
@@ -150,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.liveScreenMouseNav:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new livescreenkey()).commit();
+                break;
             case R.id.powerControlNav:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new power()).commit();
                 break;
@@ -196,5 +170,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+
+        }
+    }
+
+    public static OutputStream getOutputStream() {
+        return outputStream;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
+
+    public static int getWidth() {
+        return width;
+    }
+
+    public static DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
+    }
+
+    public static DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public static InputStream getInputStream() {
+        return inputStream;
+    }
+
+
 }
 
