@@ -35,6 +35,8 @@ public class LiveScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().setTitle(getResources().getString(R.string.liveScreen));
+
         View view = inflater.inflate(R.layout.fragment_live_screen, container, false);
         imageView = view.findViewById(R.id.imageView);
         dataOutputStream = MainActivity.getDataOutputStream();

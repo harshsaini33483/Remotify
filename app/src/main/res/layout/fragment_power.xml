@@ -22,6 +22,39 @@
        android:src="@drawable/power_24dp"
        android:id="@+id/powerButton"
        />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/powerButton"
+       android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+       android:layout_centerHorizontal="true"
+       android:text="@string/shutdown"
+       />
+
+   <ImageButton
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentStart="true"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentRight="true"
+       android:layout_marginStart="148dp"
+       android:layout_marginLeft="148dp"
+       android:layout_marginTop="222dp"
+       android:layout_marginEnd="148dp"
+       android:layout_marginRight="148dp"
+       android:src="@drawable/refresh_24dp"
+       android:id="@+id/restartButton"
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/restartButton"
+       android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+       android:layout_centerHorizontal="true"
+       android:text="@string/restart"
+       />
 
 
    <ImageButton
@@ -41,20 +74,15 @@
        android:id="@+id/sleepButton"
        />
 
-   <ImageButton
+   <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_alignParentStart="true"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentTop="true"
-       android:layout_alignParentEnd="true"
-       android:layout_alignParentRight="true"
-       android:layout_marginStart="148dp"
-       android:layout_marginLeft="148dp"
-       android:layout_marginTop="222dp"
-       android:layout_marginEnd="148dp"
-       android:layout_marginRight="148dp"
-       android:src="@drawable/refresh_24dp"
-       android:id="@+id/restartButton"
-       />
+       android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginBottom="75dp"
+       android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+       android:text="@string/sleep" />
+
+
+
 </RelativeLayout>

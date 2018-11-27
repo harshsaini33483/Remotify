@@ -433,7 +433,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="<-" />
+            android:text="LEF" />
 
         <Button
             android:id="@+id/downButton"
@@ -449,7 +449,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="->" />
+            android:text="RIGH" />
 
     </LinearLayout>
 
@@ -609,7 +609,7 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/clearTextButton"
+            android:id="@+id/capslockButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

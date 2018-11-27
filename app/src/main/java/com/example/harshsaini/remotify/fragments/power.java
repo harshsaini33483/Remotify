@@ -29,6 +29,8 @@ public class power extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().setTitle(getResources().getString(R.string.powerControl));
+
         View v= inflater.inflate(R.layout.fragment_power, container, false);
 
         new Thread(new Runnable() {
