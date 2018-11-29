@@ -147,6 +147,7 @@ public class Mouse extends Fragment {
                     }
                     break;
                 case MotionEvent.ACTION_CANCEL:
+
                 case MotionEvent.ACTION_UP:
                     //consider a tap only if user did not move mouse after ACTION_DOWN
                     if(!mouseMoved){
